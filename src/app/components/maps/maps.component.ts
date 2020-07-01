@@ -97,5 +97,6 @@ ngOnInit(){
 
   removeLastMarker() {
     this.markerPositions.pop();
+    this.saveMarker();
   }
 }
