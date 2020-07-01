@@ -7,10 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import {MaterialModule} from './material.module';
-import { MapsComponent } from './components/maps/maps.component'
+
+import { MapsComponent } from './components/maps/maps.component';
 
 
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 
