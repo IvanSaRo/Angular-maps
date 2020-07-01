@@ -8,6 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -15,10 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
   declarations: [],
   imports: [
     CommonModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatProgressBarModule,
-    MatCardModule,
+
 
 
   ],
@@ -27,6 +25,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule,
     MatProgressBarModule,
     MatCardModule,
+    MatSnackBarModule
 
   ],
 })

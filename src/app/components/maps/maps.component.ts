@@ -1,41 +1,26 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 
 import {MapInfoWindow, MapMarker} from '@angular/google-maps';
-import {Marker} from "../../classes/marker.class"
+import {Marker} from "../../classes/marker.class";
+
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
   styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit{
-label: string;
-title: string;
-  map: any;
+@ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow
+
+
   markerPositions: Marker[] = [];
   activeMarker: number;
   activeMarkerBoolean: boolean;
-@ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow
-constructor() {
-  this.label = "";
-  this.title = "";
-  this.activeMarkerBoolean = false;
-if (localStorage.getItem("marker")) {
-  this.markerPositions = JSON.parse(localStorage.getItem("marker"))
-}
 
-}
-
-infoContent = "";
   center: any;
 
-  markerOptions = {draggable: false,
-    animation: google.maps.Animation.BOUNCE};
-  /* markerPositions: google.maps.LatLngLiteral[] = []; */
+  showCoords: boolean;
 
-
-
-
-  display?: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
     mapTypeId: 'hybrid',
     zoomControl: true,
@@ -46,10 +31,17 @@ infoContent = "";
     zoom: 17
   };
 
-  infoOptions = { animation: google.maps.Animation.BOUNCE };
-  /* coordinates = new google.maps.LatLng(this.lat, this.lng); */
+  markerOptions = {draggable: false,
+    animation: google.maps.Animation.BOUNCE};
 
+    constructor(private snackBar: MatSnackBar) {
+  this.showCoords = false;
+  this.activeMarkerBoolean = false;
+  if (localStorage.getItem("marker")) {
+    this.markerPositions = JSON.parse(localStorage.getItem("marker"))
+}
 
+}
 ngOnInit(){
   navigator.geolocation.getCurrentPosition(position => {
     this.center = {
@@ -60,22 +52,15 @@ ngOnInit(){
 
 
 }
-/* marker = new google.maps.Marker({
-  position: this.coordinates,
-  map: this.map,
-  title: "Hello World!"
-});
- */
 
-
-  addMarker(event: google.maps.MouseEvent) {
+addMarker(event: google.maps.MouseEvent) {
     const newMarker = new Marker(event.latLng.toJSON())
 
      this.markerPositions.push(newMarker);
 
-
-
      this.saveMarker();
+
+     this.snackBar.open('Marcador creado', 'Cerrar', {duration: 2000});
   }
 
   saveMarker(){
@@ -83,20 +68,35 @@ ngOnInit(){
   }
 
   eraseMarker(i: number){
-    this.markerPositions.splice(i, 1);
+    this.markerPositions.splice(i, 1)
     this.saveMarker();
+    this.snackBar.open('Marcador eliminado', 'Cerrar', {duration: 2000});
+    if(this.markerPositions.length >= 0){
+      this.activeMarkerBoolean = false;
+    }
   }
 
 
 
   openInfoWindow(marker: MapMarker, index: number) {
     this.activeMarker = index;
+    console.log(this.activeMarker);
     this.activeMarkerBoolean = true;
+
     this.infoWindow.open(marker);
   }
 
   removeLastMarker() {
     this.markerPositions.pop();
-    this.saveMarker();
+    this.snackBar.open('Marcador eliminado', 'Cerrar', {duration: 2000});
   }
+  visibleCoords(){
+    this.showCoords = !this.showCoords;
+    console.log(this.showCoords);
+  }
+
+
+
+
 }
+

@@ -2,9 +2,9 @@
     <mat-card-title>Mapa</mat-card-title>
     <mat-card-content>
         <google-map (mapClick)="addMarker($event)" width="100%" height="450px" [center]="center" [options]="options">
-            <map-marker #markerElem [options]="markerOptions" *ngFor="let markerPosition of markerPositions; let i = index" [position]="markerPosition.coords" [label]="label" [title]="title" (mapClick)="openInfoWindow(markerElem, i)" (mapRightclick)="removeLastMarker()">
+            <map-marker #markerElem [options]="markerOptions" *ngFor="let markerPosition of markerPositions; let i = index" [position]="markerPosition.coords" (mapClick)="openInfoWindow(markerElem, i)" (mapRightclick)="removeLastMarker()">
             </map-marker>
-            <map-info-window [options]="infoOptions">
+            <map-info-window>
                 <div *ngIf="activeMarkerBoolean">
                     <h5>
                         {{markerPositions[activeMarker].title}} {{activeMarker}}
@@ -12,8 +12,12 @@
                     <p>
                         {{markerPositions[activeMarker].description}}
                     </p>
+                    <p *ngIf="showCoords">
+                        {{markerPositions[activeMarker].latLng}}
+                    </p>
                     <button mat-flat-button color="accent" id="boton">Editar</button>
                     <button mat-flat-button color="warn" (click)="eraseMarker(activeMarker)">Borrar</button>
+                    <button mat-flat-button color="secondary" (click)="visibleCoords()">Lat/lng</button>
                 </div>
             </map-info-window>
 
