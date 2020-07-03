@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 // MATERIAL
 
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+
 
 
 
@@ -23,9 +25,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   exports: [
     MatToolbarModule,
     MatButtonModule,
-    MatProgressBarModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatInputModule,
+
+
 
   ],
 })

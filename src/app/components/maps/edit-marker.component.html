@@ -1,0 +1,16 @@
+<div>
+
+    <mat-form-field class="example-full-width" id="form1">
+        <input matInput placeholder="Título" [(ngModel)]="title">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" id="form2">
+        <textarea rows="3" matInput placeholder="Descripción" [(ngModel)]="description"></textarea>
+    </mat-form-field>
+
+    <div id="form3" mat-dialog-mat-dialog-actions>
+        <button mat-flat-button color="accent" (click)="saveChanges()">Guardar</button>
+        <button mat-flat-button color="warn" (click)="closeDialog()" [mat-dialog-close]="true">Cancelar</button>
+    </div>
+
+</div>

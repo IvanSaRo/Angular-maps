@@ -1,0 +1,13 @@
+#form1,
+#form2 {
+    width: 100%;
+}
+
+#form3 {
+    justify-content: center;
+}
+
+button {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
